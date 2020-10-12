@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "xpbeacon",
+  "version": "1.0-SNAPSHOT",
+
+  "name": "Experience Beacons",
+  "description": "Carpet rule for experience-based amplitude on beacon status effects",
+  "authors": [
+    "FracturedCode"
+  ],
+  "contact": {
+    "homepage": "https://web.me/",
+    "sources": "https://github.com/gnembon/fabric-carpet-extension-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/xpbeacons/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+    ]
+  },
+  "mixins": [
+    "xpbeacons.mixins.json"
+  ],
+
+  "depends": {
+    "minecraft": "1.16.x",
+    "fabricloader": ">=0.4.0",
+    "carpet": "*"
+  }
+}

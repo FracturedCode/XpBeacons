@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "xpbeacons.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "BeaconBlockEntity_xpBeaconTileMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
