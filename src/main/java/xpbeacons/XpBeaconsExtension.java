@@ -4,8 +4,13 @@ import carpet.CarpetExtension;
 import carpet.CarpetServer;
 
 public class XpBeaconsExtension implements CarpetExtension {
+
+    public static void noop() {}
+
     static {
-        CarpetServer.manageExtension(new XpBeaconsExtension());
+        XpBeaconsExtension extension = new XpBeaconsExtension();
+        CarpetServer.manageExtension(extension);
+        extension.onGameStarted();
     }
     @Override
     public void onGameStarted() {

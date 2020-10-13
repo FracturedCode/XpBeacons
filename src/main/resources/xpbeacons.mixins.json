@@ -3,7 +3,9 @@
   "package": "xpbeacons.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BeaconBlockEntity_xpBeaconTileMixin"
+    "BeaconBlockEntity_xpBeaconTileMixin",
+    "MinecraftServer_noopMixin",
+    "MinecraftClient_noopMixin"
   ],
   "client": [
   ],
