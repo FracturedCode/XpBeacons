@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "xpbeacon",
-  "version": "2.0-SNAPSHOT",
+  "version": "2.0",
 
   "name": "Experience Beacons",
   "description": "Carpet rules for experience-based amplitude on beacon status effects",
@@ -9,11 +9,11 @@
     "FracturedCode"
   ],
   "contact": {
-    "homepage": "",
-    "sources": "https://github.com/FracturedCode/XpBeacons/issues"
+    "homepage": "xpbeacons.urlsl.me",
+    "sources": "https://github.com/FracturedCode/XpBeacons/"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/xpbeacons/icon.png",
 
   "environment": "*",
@@ -27,7 +27,7 @@
 
   "depends": {
     "minecraft": "1.16.x",
-    "fabricloader": ">=0.4.0",
+    "fabricloader": ">=0.9.0",
     "carpet": "*"
   }
 }
