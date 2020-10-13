@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "xpbeacon",
-  "version": "1.0-SNAPSHOT",
+  "version": "1.0",
 
   "name": "Experience Beacons",
-  "description": "Carpet rule for experience-based amplitude on beacon status effects",
+  "description": "Carpet rules for experience-based amplitude on beacon status effects",
   "authors": [
     "FracturedCode"
   ],
   "contact": {
-    "homepage": "https://web.me/",
-    "sources": "https://github.com/gnembon/fabric-carpet-extension-example-mod"
+    "homepage": "",
+    "sources": "https://github.com/FracturedCode/XpBeacons/issues"
   },
 
   "license": "CC0-1.0",

@@ -14,5 +14,5 @@ public class XpBeaconsSimpleSettings {
             validate = {Validator.NONNEGATIVE_NUMBER.class},
             category = {xpBeaconsCategory, FEATURE}
     )
-    public static int xpBeaconMax = 8000;
+    public static int xpBeaconsMax = 8000;
 }

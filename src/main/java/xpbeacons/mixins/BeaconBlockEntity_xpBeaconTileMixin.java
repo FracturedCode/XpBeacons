@@ -12,12 +12,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xpbeacons.XpBeaconsSimpleSettings;
-import net.minecraft.util.math.BlockBox;
-
-import java.util.List;
 
 @Mixin(BeaconBlockEntity.class)
 public abstract class BeaconBlockEntity_xpBeaconTileMixin extends BlockEntity {
@@ -79,7 +75,7 @@ public abstract class BeaconBlockEntity_xpBeaconTileMixin extends BlockEntity {
     }
     private void applyEffectToAllPlayers(StatusEffect se, Box range, double statusMultiplier) {
         for (PlayerEntity player : this.world.getEntitiesByClass(PlayerEntity.class, range, null)) {
-            int amplifier = (int)(Math.min((int)((double)player.experienceLevel / XpBeaconsSimpleSettings.xpBeaconMax * 255), 255) * statusMultiplier);
+            int amplifier = (int)(Math.min((int)((double)player.experienceLevel / XpBeaconsSimpleSettings.xpBeaconsMax * 255), 255) * statusMultiplier);
             player.addStatusEffect(new StatusEffectInstance(se, 400, amplifier, true, true));
         }
     }
