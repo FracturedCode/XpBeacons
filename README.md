@@ -9,6 +9,9 @@ In this mod, the status effect strength of beacons is directly correlated with y
 
 Tying the strength of beacon effects to xp is a way to justify increasing those effects; there's a cost to them.
 
+
+The effect radius of beacons are also changed from the 30/40/50 model to powers of 2 going up to 128 blocks with the largest pyramid. Not configurable, but can make this feature upon request.
+
 To use this mod, you must have [fabric-carpet](https://www.curseforge.com/minecraft/mc-mods/carpet). It is a Carpet extension and Carpet commands are used to configure this mod.
 
 ## Who is this for?
