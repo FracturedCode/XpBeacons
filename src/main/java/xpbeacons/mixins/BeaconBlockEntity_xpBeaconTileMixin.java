@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import xpbeacons.XpBeaconsCategorySettings;
 import xpbeacons.XpBeaconsSimpleSettings;
 
 @Mixin(BeaconBlockEntity.class)
@@ -54,7 +55,8 @@ public abstract class BeaconBlockEntity_xpBeaconTileMixin extends BlockEntity {
         double statusMultiplier = 0.0;
         double[] multipliersInOrder = // UGGGGG JAVA WON"T DO SWITCHES ON OBJECTS
                 {
-                        .3, .039, .02, .0157, .009, .2
+                        XpBeaconsCategorySettings.hasteMultiplier,
+                        .039, .02, .0157, .009, .2
                 };
         StatusEffect[] effectsInOrder =
                 {
@@ -75,7 +77,7 @@ public abstract class BeaconBlockEntity_xpBeaconTileMixin extends BlockEntity {
     }
     private void applyEffectToAllPlayers(StatusEffect se, Box range, double statusMultiplier) {
         for (PlayerEntity player : this.world.getEntitiesByClass(PlayerEntity.class, range, null)) {
-            int amplifier = (int)(Math.min((int)((double)player.experienceLevel / XpBeaconsSimpleSettings.xpBeaconsMax * 255), 255) * statusMultiplier);
+            int amplifier = (int)(Math.min((int)((double)player.experienceLevel / XpBeaconsCategorySettings.xpBeaconsMax * 255), 255) * statusMultiplier);
             player.addStatusEffect(new StatusEffectInstance(se, 400, amplifier, true, true));
         }
     }
