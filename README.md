@@ -44,7 +44,11 @@ Fabric loader: >= 0.9.0
 Carpet: *? Probably anything made for 1.16
 ## Links
 [CurseForge page (with jar download)](xp.urlsl.me)
+
 [Source Code](urlsl.me/xpBeaconsSource)
+
 [Wiki](urlsl.me/xpBeaconsWiki)
+
 [Issue Tracker](urlsl.me/xpBeaconsIssues)
+
 ## License MIT
