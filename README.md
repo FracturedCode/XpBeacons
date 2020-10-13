@@ -1,6 +1,6 @@
 
 # Experience Beacons
-[https://xp.urlsl.me](xp.urlsl.me)
+[https://xp.urlsl.me](https://xp.urlsl.me)
 
 A Fabric Carpet extension for experience-based amplitude on beacon status effects.
 
