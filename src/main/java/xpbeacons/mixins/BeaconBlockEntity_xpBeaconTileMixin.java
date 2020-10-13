@@ -26,6 +26,8 @@ public abstract class BeaconBlockEntity_xpBeaconTileMixin extends BlockEntity {
 
     @Shadow private int level;
 
+    @Shadow private StatusEffect secondary;
+
     public BeaconBlockEntity_xpBeaconTileMixin(BlockEntityType<?> type) {
         super(type);
     }
@@ -33,38 +35,52 @@ public abstract class BeaconBlockEntity_xpBeaconTileMixin extends BlockEntity {
     @Inject(method="applyPlayerEffects", at=@At("RETURN"))
     private void applyXpBasedStatusEffects(CallbackInfo ci) {
 
-        if (XpBeaconsSimpleSettings.xpBeacons && this.primary != null) {
-            int r = (int)Math.pow(2, this.level);
+        if (XpBeaconsSimpleSettings.xpBeacons && this.primary != null && !this.world.isClient) {
+            int r = (int)Math.pow(2, this.level + 3);
             int x1 = this.pos.getX() - r, x2 = this.pos.getX() + r,
                     z1 = this.pos.getZ() - r, z2 = this.pos.getZ() + r,
                     y1 = Math.max(this.pos.getY() - r, 0), y2 = Math.min(this.pos.getY() + r, this.world.getHeight());
             Box range = new Box(x1, y1, z1, x2, y2, z2);
 
-            double statusMultiplier = 0.0;
-            double[] multipliersInOrder = // UGGGGG JAVA WON"T DO SWITCHES ON OBJECTS
-            {
-                .1, 1.0, .2, .03, .001, .5
-            };
-            StatusEffect[] effectsInOrder =
-            {
-                StatusEffects.HASTE,
-                StatusEffects.SPEED,
-                StatusEffects.RESISTANCE,
-                StatusEffects.REGENERATION,
-                StatusEffects.JUMP_BOOST,
-                StatusEffects.STRENGTH,
-            };
-            for (int i = 0; i<effectsInOrder.length; i++) {
-                if (effectsInOrder[i].equals(this.primary)) {
-                    statusMultiplier = multipliersInOrder[i];
-                    break;
-                }
+            double statusMultiplier = getEffectSpecificAmplificationMultiplier(this.primary);
+
+            if (this.secondary == null) {
+                statusMultiplier /= 2; // Use the secondary to unlock FULL POWA
+            } else if (this.secondary.equals(StatusEffects.REGENERATION)) {
+                statusMultiplier /= 2;  // If secondary is regen apply xp-based regen
+                applyEffectToAllPlayers(this.secondary, range, getEffectSpecificAmplificationMultiplier(this.secondary));
             }
 
-            for (PlayerEntity player : this.world.getEntitiesByClass(PlayerEntity.class, range, null)) {
-                int amplifier = (int)(Math.min((int)((double)player.experienceLevel / XpBeaconsSimpleSettings.xpBeaconMax * 255), 255) * statusMultiplier);
-                player.addStatusEffect(new StatusEffectInstance(this.primary, 400, amplifier, true, true));
+            applyEffectToAllPlayers(this.primary, range, statusMultiplier);
+        }
+    }
+    private double getEffectSpecificAmplificationMultiplier(StatusEffect se) {
+        double statusMultiplier = 0.0;
+        double[] multipliersInOrder = // UGGGGG JAVA WON"T DO SWITCHES ON OBJECTS
+                {
+                        .3, .039, .02, .0157, .009, .2
+                };
+        StatusEffect[] effectsInOrder =
+                {
+                        StatusEffects.HASTE,
+                        StatusEffects.SPEED,
+                        StatusEffects.RESISTANCE,
+                        StatusEffects.REGENERATION,
+                        StatusEffects.JUMP_BOOST,
+                        StatusEffects.STRENGTH
+                };
+        for (int i = 0; i<effectsInOrder.length; i++) {
+            if (effectsInOrder[i].equals(this.primary)) {
+                statusMultiplier = multipliersInOrder[i];
+                break;
             }
+        }
+        return statusMultiplier;
+    }
+    private void applyEffectToAllPlayers(StatusEffect se, Box range, double statusMultiplier) {
+        for (PlayerEntity player : this.world.getEntitiesByClass(PlayerEntity.class, range, null)) {
+            int amplifier = (int)(Math.min((int)((double)player.experienceLevel / XpBeaconsSimpleSettings.xpBeaconMax * 255), 255) * statusMultiplier);
+            player.addStatusEffect(new StatusEffectInstance(se, 400, amplifier, true, true));
         }
     }
 }
