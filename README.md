@@ -1,6 +1,7 @@
 
 # Experience Beacons
 [https://xp.urlsl.me](xp.urlsl.me)
+
 A Fabric Carpet extension for experience-based amplitude on beacon status effects.
 ## But what does that mean, exactly?
 In this mod, the status effect strength of beacons is directly correlated with your xp level (and adjusted by some factor). For example, after placing down a beacon. you could be at xp level 0 and have resistance 1, or you could be at xp level 700 and have resistance 3. These behaviors are highly configurable *(see **How do I use it?** section)*.
