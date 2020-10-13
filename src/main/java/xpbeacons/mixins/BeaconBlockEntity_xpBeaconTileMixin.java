@@ -56,7 +56,11 @@ public abstract class BeaconBlockEntity_xpBeaconTileMixin extends BlockEntity {
         double[] multipliersInOrder = // UGGGGG JAVA WON"T DO SWITCHES ON OBJECTS
                 {
                         XpBeaconsCategorySettings.hasteMultiplier,
-                        .039, .02, .0157, .009, .2
+                        XpBeaconsCategorySettings.speedMultiplier,
+                        XpBeaconsCategorySettings.resistanceMultiplier,
+                        XpBeaconsCategorySettings.regenMultiplier,
+                        XpBeaconsCategorySettings.jumpMultiplier,
+                        XpBeaconsCategorySettings.strengthMultiplier
                 };
         StatusEffect[] effectsInOrder =
                 {
