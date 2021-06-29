@@ -1,5 +1,6 @@
 package xpbeacons.mixins;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -7,6 +8,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,8 +27,8 @@ public abstract class BeaconBlockEntity_xpBeaconTileMixin extends BlockEntity {
 
     @Shadow private StatusEffect secondary;
 
-    public BeaconBlockEntity_xpBeaconTileMixin(BlockEntityType<?> type) {
-        super(type);
+    public BeaconBlockEntity_xpBeaconTileMixin(BlockEntityType<?> type, BlockPos blockPos, BlockState blockState) {
+        super(type, blockPos, blockState);
     }
 
     @Inject(method="applyPlayerEffects", at=@At("RETURN"))
