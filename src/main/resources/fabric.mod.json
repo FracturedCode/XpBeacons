@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "xpbeacon",
+  "id": "xpbeacons",
   "version": "2.0",
 
   "name": "Experience Beacons",
@@ -26,8 +26,8 @@
   ],
 
   "depends": {
-    "minecraft": "1.16.x",
-    "fabricloader": ">=0.9.0",
+    "minecraft": "1.17.x",
+    "fabricloader": ">=0.11.0",
     "carpet": "*"
   }
 }
