@@ -27,7 +27,7 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
         super(type, pos, state);
     }
 
-    private static final EffectSettings[] effectSettings = new EffectSettings[] {
+    private static final EffectSettings[] effectsSettings = new EffectSettings[] {
             new XpBeaconsCategorySettings.StrengthSettings(),
             new XpBeaconsCategorySettings.HasteSettings(),
             new XpBeaconsCategorySettings.SpeedSettings(),
@@ -38,11 +38,11 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
 
     @Redirect(method = "applyPlayerEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
     private static boolean applyXpBasedEffects(PlayerEntity player, StatusEffectInstance oldEffect) {
+        StatusEffect effectType = oldEffect.getEffectType();
+        EffectSettings effectSettings = Arrays.stream(effectsSettings).filter(es -> es.getEffect() == effectType).findFirst().get();
+        if (XpBeaconsSimpleSettings.xpbeacons && effectSettings.getModdedBehaviorToggle()) {
 
-        if (XpBeaconsSimpleSettings.xpbeacons) {
-            StatusEffect effectType = oldEffect.getEffectType();
-
-            double amplifierMultiplier = Arrays.stream(effectSettings).filter(es -> es.getEffect() == effectType).findFirst().get().getEffectMultiplier();
+            double amplifierMultiplier = effectSettings.getEffectMultiplier();
             int amplifier = (int)(Math.min((int)((double)(player.experienceLevel) / XpBeaconsCategorySettings.xpBeaconsMax * 255), 255) * amplifierMultiplier);
 
             StatusEffectInstance newEffect = new StatusEffectInstance(
