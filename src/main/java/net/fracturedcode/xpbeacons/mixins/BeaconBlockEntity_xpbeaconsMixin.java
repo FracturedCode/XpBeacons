@@ -36,7 +36,7 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
                 StatusEffects.STRENGTH, XpBeaconsCategorySettings.strengthMultiplier
         );
         double amplifierMultiplier = effectMultiplierMap.get(effectType);
-        int amplifier = (int)(Math.min((int)((double)(((PlayerEntity)player).experienceLevel) / XpBeaconsCategorySettings.xpBeaconsMax * 255), 255) * amplifierMultiplier);
+        int amplifier = (int)(Math.min((int)((double)(player.experienceLevel) / XpBeaconsCategorySettings.xpBeaconsMax * 255), 255) * amplifierMultiplier);
 
         StatusEffectInstance newEffect = new StatusEffectInstance(
                 effectType,
