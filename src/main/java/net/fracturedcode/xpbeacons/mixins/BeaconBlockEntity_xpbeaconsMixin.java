@@ -9,17 +9,12 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings;
-
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 @Mixin(BeaconBlockEntity.class)
 public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
@@ -43,7 +38,7 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
         if (XpBeaconsSimpleSettings.xpbeacons && effectSettings.getModdedBehaviorToggle()) {
 
             double amplifierMultiplier = effectSettings.getEffectMultiplier();
-            int amplifier = (int)(Math.min((int)((double)(player.experienceLevel) / XpBeaconsCategorySettings.xpBeaconsMax * 255), 255) * amplifierMultiplier);
+            int amplifier = (int)(Math.min((int)((double)(player.experienceLevel) / effectSettings.getEffectXpCeiling() * 255), 255) * amplifierMultiplier);
 
             StatusEffectInstance newEffect = new StatusEffectInstance(
                     effectType,
