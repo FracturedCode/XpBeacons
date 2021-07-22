@@ -1,18 +1,18 @@
-package xpbeacons;
+package net.fracturedcode.xpbeacons;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpet.settings.SettingsManager;
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.server.command.ServerCommandSource;
 
 public class XpBeaconsExtension implements CarpetExtension {
     private final static SettingsManager customSettingsManager;
     public static void noop() {}
 
     static {
-        XpBeaconsExtension extension = new XpBeaconsExtension();
-        CarpetServer.manageExtension(extension);
-        customSettingsManager = new SettingsManager("2.0-SNAPSHOT", "xpBeaconsSettings", "Experience Beacons");
-        extension.onGameStarted();
+        CarpetServer.manageExtension(new XpBeaconsExtension());
+        customSettingsManager = new SettingsManager("3.0", "xpbeacons", "Experience Beacons");
     }
     @Override
     public void onGameStarted() {

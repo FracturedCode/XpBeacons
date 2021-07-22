@@ -1,11 +1,10 @@
 {
   "required": true,
-  "package": "xpbeacons.mixins",
-  "compatibilityLevel": "JAVA_8",
+  "package": "net.fracturedcode.xpbeacons.mixins",
+  "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "BeaconBlockEntity_xpBeaconTileMixin",
-    "MinecraftServer_noopMixin",
-    "MinecraftClient_noopMixin"
+    "CrashReport_noopMixin",
+    "BeaconBlockEntity_xpbeaconsMixin"
   ],
   "client": [
   ],

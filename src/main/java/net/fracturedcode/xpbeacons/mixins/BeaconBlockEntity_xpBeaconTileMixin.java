@@ -1,4 +1,4 @@
-package xpbeacons.mixins;
+package net.fracturedcode.xpbeacons.mixins;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
@@ -16,8 +16,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xpbeacons.XpBeaconsCategorySettings;
-import xpbeacons.XpBeaconsSimpleSettings;
+import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings;
+import net.fracturedcode.xpbeacons.XpBeaconsSimpleSettings;
 
 @Mixin(BeaconBlockEntity.class)
 public abstract class BeaconBlockEntity_xpBeaconTileMixin extends BlockEntity {
