@@ -2,7 +2,6 @@ package net.fracturedcode.xpbeacons;
 
 import carpet.settings.Rule;
 import carpet.settings.Validator;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 
 // This is all very verbose but this was the quickest thing I could think of that fell within the limitations of

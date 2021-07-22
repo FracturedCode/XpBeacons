@@ -12,4 +12,3 @@ public abstract class EffectSettings {
     public abstract int getEffectXpCeiling();
     public abstract boolean getModdedBehaviorToggle();
 }
-
