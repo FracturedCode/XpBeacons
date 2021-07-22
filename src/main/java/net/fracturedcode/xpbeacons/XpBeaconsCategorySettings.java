@@ -15,7 +15,7 @@ public class XpBeaconsCategorySettings {
     public static class HasteSettings extends EffectSettings {
         private final static String HASTE = "haste";
         public HasteSettings() {
-            EffectType = StatusEffects.HASTE; // to maintain language compatibility
+            EffectType = StatusEffects.HASTE;
         }
 
         @Rule(
@@ -25,26 +25,26 @@ public class XpBeaconsCategorySettings {
         public static boolean haste_xp_based_amplitude = true;
 
         @Rule(
-                desc="effect multiplier for haste",
-                validate = {Validator.PROBABILITY.class},
+                desc="effect amplitude ceiling for haste. default maybe a bit OP, play around with this one; mining obsidian is like mining stone without enchants or haste",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, HASTE}
         )
-        public static double haste_multiplier = .3;
+        public static int haste_amplitude_ceiling = 10;
 
         @Rule(
                 desc="xp ceiling in levels for haste",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, HASTE}
         )
-        public static int haste_ceiling = xpBeaconsMax;
+        public static int haste_xp_ceiling = xpBeaconsMax;
 
 
-        public double getEffectMultiplier() {
-            return haste_multiplier;
+        public int getEffectAmplitudeCeiling() {
+            return haste_amplitude_ceiling;
         }
 
         public int getEffectXpCeiling() {
-            return haste_ceiling;
+            return haste_xp_ceiling;
         }
 
         public boolean getModdedBehaviorToggle() {
@@ -65,25 +65,25 @@ public class XpBeaconsCategorySettings {
         public static boolean speed_xp_based_amplitude = true;
 
         @Rule(
-                desc="effect multiplier for speed",
-                validate = {Validator.PROBABILITY.class},
+                desc="effect amplitude ceiling for speed. default speed 6, about as fast as I'd want to go",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, SPEED}
         )
-        public static double speed_multiplier = .039;
+        public static int speed_amplitude_ceiling = 5; //
 
         @Rule(
                 desc="xp ceiling in levels for speed",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, SPEED}
         )
-        public static int speed_ceiling = xpBeaconsMax;
+        public static int speed_xp_ceiling = xpBeaconsMax;
 
-        public double getEffectMultiplier() {
-            return speed_multiplier;
+        public int getEffectAmplitudeCeiling() {
+            return speed_amplitude_ceiling;
         }
 
         public int getEffectXpCeiling() {
-            return speed_ceiling;
+            return speed_xp_ceiling;
         }
 
         public boolean getModdedBehaviorToggle() {
@@ -104,26 +104,26 @@ public class XpBeaconsCategorySettings {
         public static boolean resistance_xp_based_amplitude = true;
 
         @Rule(
-                desc="effect multiplier for resistance",
-                validate = {Validator.PROBABILITY.class},
+                desc="effect amplitude ceiling for resistance. with default of 3 you can survive 100m drop no armor on half heart. 200m drop with enchanted armor easily",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, RESISTANCE}
         )
-        public static double resistance_multiplier = .02;
+        public static int resistance_amplitude_ceiling = 3;
 
         @Rule(
                 desc="xp ceiling in levels for resistance",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, RESISTANCE}
         )
-        public static int resistance_ceiling = xpBeaconsMax;
+        public static int resistance_xp_ceiling = xpBeaconsMax;
 
 
-        public double getEffectMultiplier() {
-            return resistance_multiplier;
+        public int getEffectAmplitudeCeiling() {
+            return resistance_amplitude_ceiling;
         }
 
         public int getEffectXpCeiling() {
-            return resistance_ceiling;
+            return resistance_xp_ceiling;
         }
 
         public boolean getModdedBehaviorToggle() {
@@ -144,26 +144,26 @@ public class XpBeaconsCategorySettings {
         public static boolean regeneration_xp_based_amplitude = true;
 
         @Rule(
-                desc="effect multiplier for resistance",
-                validate = {Validator.PROBABILITY.class},
+                desc="effect amplitude ceiling for resistance. default 5 is pretty fast, but if you have the default 8000 levels, is it really OP?",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, REGENERATION}
         )
-        public static double regeneration_multiplier = .0157;
+        public static int regeneration_amplitude_ceiling = 5;
 
         @Rule(
                 desc="xp ceiling in levels for resistance",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, REGENERATION}
         )
-        public static int regeneration_ceiling = xpBeaconsMax;
+        public static int regeneration_xp_ceiling = xpBeaconsMax;
 
 
-        public double getEffectMultiplier() {
-            return regeneration_multiplier;
+        public int getEffectAmplitudeCeiling() {
+            return regeneration_amplitude_ceiling;
         }
 
         public int getEffectXpCeiling() {
-            return regeneration_ceiling;
+            return regeneration_xp_ceiling;
         }
 
         public boolean getModdedBehaviorToggle() {
@@ -184,26 +184,26 @@ public class XpBeaconsCategorySettings {
         public static boolean jump_boost_xp_based_amplitude = true;
 
         @Rule(
-                desc="effect multiplier for resistance",
-                validate = {Validator.PROBABILITY.class},
-                category = {xpbeaconsCategory, JUMP}
-        )
-        public static double jump_boost_multiplier = .009;
-
-        @Rule(
-                desc="xp ceiling in levels for resistance",
+                desc="effect amplitude ceiling for jump boost",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, JUMP}
         )
-        public static int jump_boost_ceiling = xpBeaconsMax;
+        public static int jump_boost_amplitude_ceiling = 2;
+
+        @Rule(
+                desc="xp ceiling in levels for jump boost",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                category = {xpbeaconsCategory, JUMP}
+        )
+        public static int jump_boost_xp_ceiling = xpBeaconsMax;
 
 
-        public double getEffectMultiplier() {
-            return jump_boost_multiplier;
+        public int getEffectAmplitudeCeiling() {
+            return jump_boost_amplitude_ceiling;
         }
 
         public int getEffectXpCeiling() {
-            return jump_boost_ceiling;
+            return jump_boost_xp_ceiling;
         }
 
         public boolean getModdedBehaviorToggle() {
@@ -224,26 +224,26 @@ public class XpBeaconsCategorySettings {
         public static boolean strength_xp_based_amplitude = true;
 
         @Rule(
-                desc="effect multiplier for resistance",
-                validate = {Validator.PROBABILITY.class},
+                desc="effect amplitude ceiling for resistance. one hit a zombie with your fists in this default.",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, STRENGTH}
         )
-        public static double strength_multiplier = .2;
+        public static int strength_amplitude_ceiling = 4;
 
         @Rule(
                 desc="xp ceiling in levels for resistance",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, STRENGTH}
         )
-        public static int strength_ceiling = xpBeaconsMax;
+        public static int strength_xp_ceiling = xpBeaconsMax;
 
 
-        public double getEffectMultiplier() {
-            return strength_multiplier;
+        public int getEffectAmplitudeCeiling() {
+            return strength_amplitude_ceiling;
         }
 
         public int getEffectXpCeiling() {
-            return strength_ceiling;
+            return strength_xp_ceiling;
         }
 
         public boolean getModdedBehaviorToggle() {

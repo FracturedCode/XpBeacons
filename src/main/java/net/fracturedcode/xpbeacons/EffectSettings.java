@@ -8,7 +8,7 @@ public abstract class EffectSettings {
         return EffectType;
     }
 
-    public abstract double getEffectMultiplier();
+    public abstract int getEffectAmplitudeCeiling();
     public abstract int getEffectXpCeiling();
     public abstract boolean getModdedBehaviorToggle();
 }

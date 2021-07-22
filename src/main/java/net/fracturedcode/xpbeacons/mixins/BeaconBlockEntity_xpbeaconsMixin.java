@@ -35,15 +35,16 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
     private static boolean applyXpBasedEffects(PlayerEntity player, StatusEffectInstance oldEffect) {
         StatusEffect effectType = oldEffect.getEffectType();
         EffectSettings effectSettings = Arrays.stream(effectsSettings).filter(es -> es.getEffect() == effectType).findFirst().get();
+
         if (XpBeaconsSimpleSettings.xpbeacons && effectSettings.getModdedBehaviorToggle()) {
 
-            double amplifierMultiplier = effectSettings.getEffectMultiplier();
-            int amplifier = (int)(Math.min((int)((double)(player.experienceLevel) / effectSettings.getEffectXpCeiling() * 255), 255) * amplifierMultiplier);
+            int amplifier = (int)(effectSettings.getEffectAmplitudeCeiling() * ((double)Math.min(player.experienceLevel, effectSettings.getEffectXpCeiling()) / effectSettings.getEffectXpCeiling()));
 
             StatusEffectInstance newEffect = new StatusEffectInstance(
                     effectType,
                     oldEffect.getDuration(),
-                    amplifier, oldEffect.isAmbient(),
+                    amplifier,
+                    oldEffect.isAmbient(),
                     oldEffect.shouldShowParticles(),
                     oldEffect.shouldShowIcon()
             );
