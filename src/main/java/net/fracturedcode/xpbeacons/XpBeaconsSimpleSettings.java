@@ -1,4 +1,4 @@
-package xpbeacons;
+package net.fracturedcode.xpbeacons;
 
 import carpet.settings.Rule;
 import carpet.settings.Validator;
