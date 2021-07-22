@@ -3,8 +3,6 @@ package net.fracturedcode.xpbeacons;
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpet.settings.SettingsManager;
-import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.server.command.ServerCommandSource;
 
 public class XpBeaconsExtension implements CarpetExtension {
     private final static SettingsManager customSettingsManager;
@@ -12,13 +10,20 @@ public class XpBeaconsExtension implements CarpetExtension {
 
     static {
         CarpetServer.manageExtension(new XpBeaconsExtension());
-        customSettingsManager = new SettingsManager("3.0", "xpbeacons", "Experience Beacons");
+        customSettingsManager = new SettingsManager("4.0", "xpbeacons", "Experience Beacons");//VERSION
     }
     @Override
     public void onGameStarted() {
         CarpetServer.settingsManager.parseSettingsClass(XpBeaconsSimpleSettings.class);
-        customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.class);
+
+        customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.HasteSettings.class);
+        customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.SpeedSettings.class);
+        customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.RegenerationSettings.class);
+        customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.ResistanceSettings.class);
+        customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.JumpBoostSettings.class);
+        customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.StrengthSettings.class);
     }
+
     @Override
     public SettingsManager customSettingsManager() {
         return customSettingsManager;
