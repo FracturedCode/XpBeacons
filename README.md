@@ -2,16 +2,16 @@
 # Experience Beacons
 [https://xp.fracturedcode.net](https://xp.fracturedcode.net)
 
-*Now with server support*
+*Now with server support and xp drain*
 
 A Fabric Carpet extension for experience-based amplitude on beacon status effects.
 
 ## But what does that mean, exactly?
 In this mod, the status effect amplitude of beacons is directly (linearly) related to your xp level. For example, after placing down a beacon. you could be at xp level 0 and have resistance 1, or you could be at xp level 700 and have resistance 3. These behaviors are highly configurable *(see **How do I use it?** section)*.
 
-Tying the strength of beacon effects to xp is a way to justify increasing those effects; there's a cost to them.
+Tying the strength of beacon effects to xp is a way to justify increasing those effects; there's a cost to them. Here's an example scenario. At default settings, if you are at 8000 xp levels and select resistance in your beacon, you will have resistance 4 (or amplitude 3). With this you can survive a 100m fall with no armor at half heart. A 200m fall with armor can be survived easily.
 
-Here's an example scenario. At default settings, if you are at 8000 xp levels and select resistance in your beacon, you will have resistance 4 (or amplitude 3). With this you can survive a 100m fall with no armor at half heart. A 200m fall with armor can be survived easily.
+There's a new, separate mechanic that helps balance this out even further that can be changed on a per-effect basis. Xp points can be slowly consumed while using beacons.
 
 In newer versions, the beacon radius is no longer affected. This is soon to be changed (like, this week). Rest assured this behavior will also be configurable.
 
@@ -24,6 +24,13 @@ If you have the means to acquire thousands of levels and would appreciate things
 
 I assume if you have the means to acquire that many levels you have something like an enderdragon farm, which indicates you probably have carpet mod anyway. And if you don't, why not? Though, of course, if you don't have a massive xp farm you can decrease the scale to whatever goal you would like.
 
+### I Am Looking for Feedback
+If you are a late game player I would love your feedback on the balance of the features, any changes you would make, or any bugs you find.
+
+For example, what do you think about xp drain? Are the default values too aggressive? Did you just end up turning it off or turning it down?
+
+![beacons in action](https://i.imgur.com/H4sapLl.png)
+
 ## How to use the mod and how it works:
 
 Set up a beacon the way you normally would. To access the higher level effects, just keep gaining xp.
@@ -32,14 +39,20 @@ Set up a beacon the way you normally would. To access the higher level effects, 
 - Each status effect has an amplitude ceiling (ie `strength_amplitude_ceiling`) that is reached at the xp ceiling.
 - Your xp level and effect amplitude are directly related, if you are at half the `<effect>_xp_ceiling`, your status effect amplitude will be half of `<effect>_amplitude_ceiling` (rounded down).
 - Regen is also available.
+- A new feature called "xp drain" allows the consumption of xp points within the radius of a beacon. It is proportional to the xp level by `xp level * <effect>_xp_drain_rate` and can be toggled off.
 
 ### How to configure the mod:
-- To turn on the feature which is off by default, use **`/carpet xpbeacons true`**
-- All configuration settings are in the **`/xpbeacons`** command. 
+- To turn on the mod which is off by default, use **`/carpet xpbeacons true`**
+- All configuration settings are in the **`/xpbeacons`** command.
+- To toggle off the xp amplitude feature on a specific effect, use **`/xpbeacons <effect>_xp_based_amplitude false`**
 - To adjust the xp ceiling for a specific status effect use **`/xpbeacons <effect>_xp_ceiling`**. Default 8000. "Xp ceiling" is kind of a misnomer because you can still go beyond the ceiling, but it doesn't change the status effects to go higher.
 - To adjust the effect multiplier there are many variables in the **`/xpbeacons`** command for that purpose suffixed with `amplitude_ceiling` ie `haste_amplitude_ceiling`. These are important as I have tried to give a reasonable balance to them, but you may find your own sweet spot. These values can be set from 0 to 255 and indicate the minecraft effect amplitude. So if you want to have speed 255 at or above your xp ceiling (use and abuse I guess), set the amplitude ceiling to a monstrous 255.
+- The xp drain feature is independent of the xp amplitude feature. To toggle off xp drain on a specific effect, use **`/xpbeacons <effect>_xp_drain false`**
+- The xp drain rate can be adjusted with **`/xpbeacons <effect>_xp_drain_rate <somedecimal>`**, where the default is `.025`
 
 An example of something you might want to change is the speeds you can achieve. If your xp levels are greater than or equal to your xp ceiling value, you will have speed 6, which might be uncomfortable for some people. To adjust it to speed 5, use **`/xpbeacons speed_amplifier_ceiling 4`**.
+
+Maybe you feel your xp is consumed too quickly when in range of a beacon, but you still like the feature. You can turn down the drain rate for a specific effect, say haste, with **`/xpbeacons haste_xp_drain_rate .02`**. Where .02 is a decimal of your choice, though .02 is a good place to start, imo.
 
 ## What versions will it work with?
 Currently, you must have 1.17.x
