@@ -37,8 +37,9 @@ public class XpBeaconsCategorySettings {
 
         @Rule(
                 desc="effect amplitude ceiling for haste. default maybe a bit OP, play around with this one; mining obsidian is like mining stone without enchants or haste",
-                validate = {AmplifierLimit.class},
-                category = {xpbeaconsCategory, HASTE}
+                validate = AmplifierLimit.class,
+                category = {xpbeaconsCategory, HASTE},
+                strict = false
         )
         public static int haste_amplitude_ceiling = 10;
 
@@ -49,6 +50,18 @@ public class XpBeaconsCategorySettings {
         )
         public static int haste_xp_ceiling = xpBeaconsMax;
 
+        @Rule(
+                desc="xp drain feature toggle for haste",
+                category = {xpbeaconsCategory, HASTE}
+        )
+        public static boolean haste_xp_drain = true;
+
+        @Rule(
+                desc="xp drain rate for haste. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                category = {xpbeaconsCategory, HASTE}
+        )
+        public static double haste_xp_drain_rate = (double)1/40;
 
         public int getEffectAmplitudeCeiling() {
             return haste_amplitude_ceiling;
@@ -58,8 +71,16 @@ public class XpBeaconsCategorySettings {
             return haste_xp_ceiling;
         }
 
-        public boolean getModdedBehaviorToggle() {
+        public boolean getXpAmplitudeToggle() {
             return haste_xp_based_amplitude;
+        }
+
+        public double getXpDrainRate() {
+            return haste_xp_drain_rate;
+        }
+
+        public boolean getShouldDrainXp() {
+            return haste_xp_drain;
         }
     }
 
@@ -78,9 +99,10 @@ public class XpBeaconsCategorySettings {
         @Rule(
                 desc="effect amplitude ceiling for speed. default speed 6, about as fast as I'd want to go",
                 validate = {AmplifierLimit.class},
-                category = {xpbeaconsCategory, SPEED}
+                category = {xpbeaconsCategory, SPEED},
+                strict = false
         )
-        public static int speed_amplitude_ceiling = 5; //
+        public static int speed_amplitude_ceiling = 5;
 
         @Rule(
                 desc="xp ceiling in levels for speed",
@@ -88,6 +110,19 @@ public class XpBeaconsCategorySettings {
                 category = {xpbeaconsCategory, SPEED}
         )
         public static int speed_xp_ceiling = xpBeaconsMax;
+
+        @Rule(
+                desc="xp drain feature toggle for speed",
+                category = {xpbeaconsCategory, SPEED}
+        )
+        public static boolean speed_xp_drain = true;
+
+        @Rule(
+                desc="xp drain rate for haste. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                category = {xpbeaconsCategory, SPEED}
+        )
+        public static double speed_xp_drain_rate = (double)1/40;
 
         public int getEffectAmplitudeCeiling() {
             return speed_amplitude_ceiling;
@@ -97,8 +132,16 @@ public class XpBeaconsCategorySettings {
             return speed_xp_ceiling;
         }
 
-        public boolean getModdedBehaviorToggle() {
+        public boolean getXpAmplitudeToggle() {
             return speed_xp_based_amplitude;
+        }
+
+        public double getXpDrainRate() {
+            return speed_xp_drain_rate;
+        }
+
+        public boolean getShouldDrainXp() {
+            return speed_xp_drain;
         }
     }
 
@@ -128,6 +171,20 @@ public class XpBeaconsCategorySettings {
         )
         public static int resistance_xp_ceiling = xpBeaconsMax;
 
+        @Rule(
+                desc="xp drain feature toggle for resistance",
+                category = {xpbeaconsCategory, RESISTANCE}
+        )
+        public static boolean resistance_xp_drain = true;
+
+        @Rule(
+                desc="xp drain rate for resistance. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                category = {xpbeaconsCategory, RESISTANCE},
+                strict = false
+        )
+        public static double resistance_xp_drain_rate = (double)1/40;
+
 
         public int getEffectAmplitudeCeiling() {
             return resistance_amplitude_ceiling;
@@ -137,8 +194,16 @@ public class XpBeaconsCategorySettings {
             return resistance_xp_ceiling;
         }
 
-        public boolean getModdedBehaviorToggle() {
+        public boolean getXpAmplitudeToggle() {
             return resistance_xp_based_amplitude;
+        }
+
+        public double getXpDrainRate() {
+            return resistance_xp_drain_rate;
+        }
+
+        public boolean getShouldDrainXp() {
+            return resistance_xp_drain;
         }
     }
 
@@ -168,6 +233,20 @@ public class XpBeaconsCategorySettings {
         )
         public static int regeneration_xp_ceiling = xpBeaconsMax;
 
+        @Rule(
+                desc="xp drain feature toggle for regeneration",
+                category = {xpbeaconsCategory, REGENERATION}
+        )
+        public static boolean regeneration_xp_drain = true;
+
+        @Rule(
+                desc="xp drain rate for regeneration. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                category = {xpbeaconsCategory, REGENERATION},
+                strict = false
+        )
+        public static double regeneration_xp_drain_rate = (double)1/40;
+
 
         public int getEffectAmplitudeCeiling() {
             return regeneration_amplitude_ceiling;
@@ -177,8 +256,16 @@ public class XpBeaconsCategorySettings {
             return regeneration_xp_ceiling;
         }
 
-        public boolean getModdedBehaviorToggle() {
+        public boolean getXpAmplitudeToggle() {
             return regeneration_xp_based_amplitude;
+        }
+
+        public double getXpDrainRate() {
+            return regeneration_xp_drain_rate;
+        }
+
+        public boolean getShouldDrainXp() {
+            return regeneration_xp_drain;
         }
     }
 
@@ -208,6 +295,20 @@ public class XpBeaconsCategorySettings {
         )
         public static int jump_boost_xp_ceiling = xpBeaconsMax;
 
+        @Rule(
+                desc="xp drain feature toggle for jump boost",
+                category = {xpbeaconsCategory, JUMP}
+        )
+        public static boolean jump_boost_xp_drain = true;
+
+        @Rule(
+                desc="xp drain rate for jump boost. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                category = {xpbeaconsCategory, JUMP},
+                strict = false
+        )
+        public static double jump_boost_xp_drain_rate = (double)1/40;
+
 
         public int getEffectAmplitudeCeiling() {
             return jump_boost_amplitude_ceiling;
@@ -217,8 +318,16 @@ public class XpBeaconsCategorySettings {
             return jump_boost_xp_ceiling;
         }
 
-        public boolean getModdedBehaviorToggle() {
+        public boolean getXpAmplitudeToggle() {
             return jump_boost_xp_based_amplitude;
+        }
+
+        public double getXpDrainRate() {
+            return jump_boost_xp_drain_rate;
+        }
+
+        public boolean getShouldDrainXp() {
+            return jump_boost_xp_drain;
         }
     }
 
@@ -229,24 +338,38 @@ public class XpBeaconsCategorySettings {
         }
 
         @Rule(
-                desc="toggle xp beacons for resistance effect",
+                desc="toggle xp beacons for strength effect",
                 category = {xpbeaconsCategory, STRENGTH}
         )
         public static boolean strength_xp_based_amplitude = true;
 
         @Rule(
-                desc="effect amplitude ceiling for resistance. one hit a zombie with your fists in this default.",
+                desc="effect amplitude ceiling for strength. one hit a zombie with your fists in this default.",
                 validate = {AmplifierLimit.class},
                 category = {xpbeaconsCategory, STRENGTH}
         )
         public static int strength_amplitude_ceiling = 4;
 
         @Rule(
-                desc="xp ceiling in levels for resistance",
+                desc="xp ceiling in levels for strength",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, STRENGTH}
         )
         public static int strength_xp_ceiling = xpBeaconsMax;
+
+        @Rule(
+                desc="xp drain feature toggle for strength",
+                category = {xpbeaconsCategory, STRENGTH}
+        )
+        public static boolean strength_xp_drain = true;
+
+        @Rule(
+                desc="xp drain rate for strength. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                category = {xpbeaconsCategory, STRENGTH},
+                strict = false
+        )
+        public static double strength_xp_drain_rate = (double)1/40;
 
 
         public int getEffectAmplitudeCeiling() {
@@ -257,8 +380,16 @@ public class XpBeaconsCategorySettings {
             return strength_xp_ceiling;
         }
 
-        public boolean getModdedBehaviorToggle() {
+        public boolean getXpAmplitudeToggle() {
             return strength_xp_based_amplitude;
+        }
+
+        public double getXpDrainRate() {
+            return strength_xp_drain_rate;
+        }
+
+        public boolean getShouldDrainXp() {
+            return strength_xp_drain;
         }
     }
 }
