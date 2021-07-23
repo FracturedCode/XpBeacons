@@ -39,7 +39,7 @@ Set up a beacon the way you normally would. To access the higher level effects, 
 - Each status effect has an amplitude ceiling (ie `strength_amplitude_ceiling`) that is reached at the xp ceiling.
 - Your xp level and effect amplitude are directly related, if you are at half the `<effect>_xp_ceiling`, your status effect amplitude will be half of `<effect>_amplitude_ceiling` (rounded down).
 - Regen is also available.
-- A new feature called "xp drain" allows the consumption of xp points within the radius of a beacon. It is proportional to the xp level by `xp level * <effect>_xp_drain_rate` and can be toggled off.
+- A new feature called "xp drain" allows the consumption of xp points within the radius of a beacon. It is proportional to the xp level by `xp points drained = xp level * <effect>_xp_drain_rate` and can be toggled off.
 
 ### How to configure the mod:
 - To turn on the mod which is off by default, use **`/carpet xpbeacons true`**
@@ -48,7 +48,7 @@ Set up a beacon the way you normally would. To access the higher level effects, 
 - To adjust the xp ceiling for a specific status effect use **`/xpbeacons <effect>_xp_ceiling`**. Default 8000. "Xp ceiling" is kind of a misnomer because you can still go beyond the ceiling, but it doesn't change the status effects to go higher.
 - To adjust the effect multiplier there are many variables in the **`/xpbeacons`** command for that purpose suffixed with `amplitude_ceiling` ie `haste_amplitude_ceiling`. These are important as I have tried to give a reasonable balance to them, but you may find your own sweet spot. These values can be set from 0 to 255 and indicate the minecraft effect amplitude. So if you want to have speed 255 at or above your xp ceiling (use and abuse I guess), set the amplitude ceiling to a monstrous 255.
 - The xp drain feature is independent of the xp amplitude feature. To toggle off xp drain on a specific effect, use **`/xpbeacons <effect>_xp_drain false`**
-- The xp drain rate can be adjusted with **`/xpbeacons <effect>_xp_drain_rate <somedecimal>`**, where the default is `.025`
+- The xp drain rate can be adjusted with **`/xpbeacons <effect>_xp_drain_rate <somedecimal>`**, where the default is `.025`.
 
 An example of something you might want to change is the speeds you can achieve. If your xp levels are greater than or equal to your xp ceiling value, you will have speed 6, which might be uncomfortable for some people. To adjust it to speed 5, use **`/xpbeacons speed_amplifier_ceiling 4`**.
 
