@@ -65,10 +65,8 @@ My time is valuable. If I like the idea, maybe I will implement it, and do with 
 
 ## Future features (coming *actually* soon)
 - Configurable beacon radius
-- Configurable xp drain when using a beacon
 - A new home for the mod on my website (don't worry, I won't be yanking it from curseforge)
 - A maven repository for developers
-- Fix bug no carpet rule validation for amplitude ceiling
 
 ## Dependencies
 Minecraft: 1.17.x

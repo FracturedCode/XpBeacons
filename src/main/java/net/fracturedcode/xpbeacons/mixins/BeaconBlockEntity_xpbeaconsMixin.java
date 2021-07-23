@@ -34,23 +34,29 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
     @Redirect(method = "applyPlayerEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
     private static boolean applyXpBasedEffects(PlayerEntity player, StatusEffectInstance oldEffect) {
         StatusEffect effectType = oldEffect.getEffectType();
-        EffectSettings effectSettings = Arrays.stream(effectsSettings).filter(es -> es.getEffect() == effectType).findFirst().get();
 
-        if (XpBeaconsSimpleSettings.xpbeacons && effectSettings.getModdedBehaviorToggle()) {
+        if (XpBeaconsSimpleSettings.xpbeacons) {
+            EffectSettings effectSettings = Arrays.stream(effectsSettings).filter(es -> es.getEffect() == effectType).findFirst().get();
 
-            int amplifier = (int)(effectSettings.getEffectAmplitudeCeiling() * ((double)Math.min(player.experienceLevel, effectSettings.getEffectXpCeiling()) / effectSettings.getEffectXpCeiling()));
+            if (effectSettings.getShouldDrainXp()) {
+                player.addExperience((int)(-player.experienceLevel * effectSettings.getXpDrainRate()));
+            }
 
-            StatusEffectInstance newEffect = new StatusEffectInstance(
-                    effectType,
-                    oldEffect.getDuration(),
-                    amplifier,
-                    oldEffect.isAmbient(),
-                    oldEffect.shouldShowParticles(),
-                    oldEffect.shouldShowIcon()
-            );
-            return player.addStatusEffect(newEffect);
-        } else {
-            return player.addStatusEffect(oldEffect);
+            if (effectSettings.getXpAmplitudeToggle()) {
+
+                int amplifier = (int)(effectSettings.getEffectAmplitudeCeiling() * ((double)Math.min(player.experienceLevel, effectSettings.getEffectXpCeiling()) / effectSettings.getEffectXpCeiling()));
+
+                StatusEffectInstance newEffect = new StatusEffectInstance(
+                        effectType,
+                        oldEffect.getDuration(),
+                        amplifier,
+                        oldEffect.isAmbient(),
+                        oldEffect.shouldShowParticles(),
+                        oldEffect.shouldShowIcon()
+                );
+                return player.addStatusEffect(newEffect);
+            }
         }
+        return player.addStatusEffect(oldEffect);
     }
 }
