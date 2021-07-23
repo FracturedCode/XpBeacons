@@ -13,7 +13,7 @@
     "sources": "https://github.com/FracturedCode/XpBeacons/"
   },
 
-  "license": "MIT",
+  "license": "LGPLv3",
   "icon": "assets/xpbeacons/icon.png",
 
   "environment": "*",
