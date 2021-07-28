@@ -32,31 +32,31 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
     };
 
     @Redirect(method = "applyPlayerEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
-    private static boolean applyXpBasedEffects(PlayerEntity player, StatusEffectInstance oldEffect) {
-        StatusEffect effectType = oldEffect.getEffectType();
+    private static boolean applyXpBasedEffects(PlayerEntity player, StatusEffectInstance effect) {
+        StatusEffect effectType = effect.getEffectType();
 
         if (XpBeaconsSimpleSettings.xpbeacons) {
             EffectSettings effectSettings = Arrays.stream(effectsSettings).filter(es -> es.getEffect() == effectType).findFirst().get();
-
-            if (effectSettings.getShouldDrainXp()) {
-                player.addExperience((int)(-player.experienceLevel * effectSettings.getXpDrainRate()));
-            }
+            int amplifier = effect.getAmplifier();
 
             if (effectSettings.getXpAmplitudeToggle()) {
 
-                int amplifier = (int)(effectSettings.getEffectAmplitudeCeiling() * ((double)Math.min(player.experienceLevel, effectSettings.getEffectXpCeiling()) / effectSettings.getEffectXpCeiling()));
+                amplifier = (int)(effectSettings.getEffectAmplitudeCeiling() * ((double)Math.min(player.experienceLevel, effectSettings.getEffectXpCeiling()) / effectSettings.getEffectXpCeiling()));
 
-                StatusEffectInstance newEffect = new StatusEffectInstance(
+                effect = new StatusEffectInstance(
                         effectType,
-                        oldEffect.getDuration(),
+                        effect.getDuration(),
                         amplifier,
-                        oldEffect.isAmbient(),
-                        oldEffect.shouldShowParticles(),
-                        oldEffect.shouldShowIcon()
+                        effect.isAmbient(),
+                        effect.shouldShowParticles(),
+                        effect.shouldShowIcon()
                 );
-                return player.addStatusEffect(newEffect);
+            }
+
+            if (effectSettings.getShouldDrainXp()) {
+                player.addExperience(-amplifier * effectSettings.getXpDrainRate());
             }
         }
-        return player.addStatusEffect(oldEffect);
+        return player.addStatusEffect(effect);
     }
 }
