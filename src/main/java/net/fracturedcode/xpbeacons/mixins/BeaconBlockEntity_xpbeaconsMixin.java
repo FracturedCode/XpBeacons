@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import java.util.Arrays;
 
@@ -30,6 +31,21 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
             new XpBeaconsCategorySettings.RegenerationSettings(),
             new XpBeaconsCategorySettings.JumpBoostSettings()
     };
+
+    @ModifyVariable(method="applyPlayerEffects", at = @At("STORE"), ordinal = 0)
+    private static double customBeaconRadius(double calculated) {
+        if (XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_modified) {
+            return switch ((int) calculated) {
+                case 20 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_one;
+                case 30 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_two;
+                case 40 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_three;
+                case 50 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_four;
+                default -> throw new RuntimeException("Impossible beacon radius state for vanilla");
+            };
+        } else {
+            return calculated;
+        }
+    }
 
     @Redirect(method = "applyPlayerEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
     private static boolean applyXpBasedEffects(PlayerEntity player, StatusEffectInstance effect) {

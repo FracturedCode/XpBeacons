@@ -23,6 +23,44 @@ public class XpBeaconsCategorySettings {
     // the default level ceiling of xp-based beacon status effects
     public static int xpBeaconsMax = 8000;
 
+    public static class BeaconRadiusSettings {
+        private final static String radiusCategory = "beacon radius";
+
+        @Rule(
+                desc="toggle custom beacon reach that uses 'beacon_radius_level_num' rules",
+                category = {xpbeaconsCategory, radiusCategory}
+        )
+        public static boolean beacon_radius_modified = false;
+
+        @Rule(
+                desc="half side length reach of one level pyramid beacon",
+                category = {xpbeaconsCategory, radiusCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_radius_level_one = 16;
+
+        @Rule(
+                desc="half side length reach of two level pyramid beacon",
+                category = {xpbeaconsCategory, radiusCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_radius_level_two = 32;
+
+        @Rule(
+                desc="half side length reach of three level pyramid beacon",
+                category = {xpbeaconsCategory, radiusCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_radius_level_three = 64;
+
+        @Rule(
+                desc="half side length reach of four level pyramid beacon",
+                category = {xpbeaconsCategory, radiusCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_radius_level_four = 100;
+    }
+
     public static class HasteSettings extends EffectSettings {
         private final static String HASTE = "haste";
         public HasteSettings() {
