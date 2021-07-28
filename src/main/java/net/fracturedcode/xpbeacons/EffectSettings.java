@@ -11,6 +11,6 @@ public abstract class EffectSettings {
     public abstract int getEffectAmplitudeCeiling();
     public abstract int getEffectXpCeiling();
     public abstract boolean getXpAmplitudeToggle();
-    public abstract double getXpDrainRate();
+    public abstract int getXpDrainRate();
     public abstract boolean getShouldDrainXp();
 }

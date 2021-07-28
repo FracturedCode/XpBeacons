@@ -23,6 +23,44 @@ public class XpBeaconsCategorySettings {
     // the default level ceiling of xp-based beacon status effects
     public static int xpBeaconsMax = 8000;
 
+    public static class BeaconRadiusSettings {
+        private final static String radiusCategory = "beacon radius";
+
+        @Rule(
+                desc="toggle custom beacon reach that uses 'beacon_radius_level_num' rules",
+                category = {xpbeaconsCategory, radiusCategory}
+        )
+        public static boolean beacon_radius_modified = false;
+
+        @Rule(
+                desc="half side length reach of one level pyramid beacon",
+                category = {xpbeaconsCategory, radiusCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_radius_level_one = 16;
+
+        @Rule(
+                desc="half side length reach of two level pyramid beacon",
+                category = {xpbeaconsCategory, radiusCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_radius_level_two = 32;
+
+        @Rule(
+                desc="half side length reach of three level pyramid beacon",
+                category = {xpbeaconsCategory, radiusCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_radius_level_three = 64;
+
+        @Rule(
+                desc="half side length reach of four level pyramid beacon",
+                category = {xpbeaconsCategory, radiusCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_radius_level_four = 100;
+    }
+
     public static class HasteSettings extends EffectSettings {
         private final static String HASTE = "haste";
         public HasteSettings() {
@@ -57,11 +95,11 @@ public class XpBeaconsCategorySettings {
         public static boolean haste_xp_drain = true;
 
         @Rule(
-                desc="xp drain rate for haste. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                desc="xp drain rate for haste. each beacon tick takes away (haste_xp_drain_rate * effect amplifier) xp POINTS",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, HASTE}
         )
-        public static double haste_xp_drain_rate = (double)1/40;
+        public static int haste_xp_drain_rate = 10;
 
         public int getEffectAmplitudeCeiling() {
             return haste_amplitude_ceiling;
@@ -75,7 +113,7 @@ public class XpBeaconsCategorySettings {
             return haste_xp_based_amplitude;
         }
 
-        public double getXpDrainRate() {
+        public int getXpDrainRate() {
             return haste_xp_drain_rate;
         }
 
@@ -118,11 +156,11 @@ public class XpBeaconsCategorySettings {
         public static boolean speed_xp_drain = true;
 
         @Rule(
-                desc="xp drain rate for haste. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                desc="xp drain rate for haste. each beacon tick takes away (haste_xp_drain_rate * effect amplifier) xp POINTS",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, SPEED}
         )
-        public static double speed_xp_drain_rate = (double)1/40;
+        public static int speed_xp_drain_rate = 10;
 
         public int getEffectAmplitudeCeiling() {
             return speed_amplitude_ceiling;
@@ -136,7 +174,7 @@ public class XpBeaconsCategorySettings {
             return speed_xp_based_amplitude;
         }
 
-        public double getXpDrainRate() {
+        public int getXpDrainRate() {
             return speed_xp_drain_rate;
         }
 
@@ -178,12 +216,12 @@ public class XpBeaconsCategorySettings {
         public static boolean resistance_xp_drain = true;
 
         @Rule(
-                desc="xp drain rate for resistance. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                desc="xp drain rate for resistance. each beacon tick takes away (haste_xp_drain_rate * effect amplifier) xp POINTS",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, RESISTANCE},
                 strict = false
         )
-        public static double resistance_xp_drain_rate = (double)1/40;
+        public static int resistance_xp_drain_rate = 10;
 
 
         public int getEffectAmplitudeCeiling() {
@@ -198,7 +236,7 @@ public class XpBeaconsCategorySettings {
             return resistance_xp_based_amplitude;
         }
 
-        public double getXpDrainRate() {
+        public int getXpDrainRate() {
             return resistance_xp_drain_rate;
         }
 
@@ -240,12 +278,12 @@ public class XpBeaconsCategorySettings {
         public static boolean regeneration_xp_drain = true;
 
         @Rule(
-                desc="xp drain rate for regeneration. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                desc="xp drain rate for regeneration. each beacon tick takes away (haste_xp_drain_rate * effect amplifier) xp POINTS",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, REGENERATION},
                 strict = false
         )
-        public static double regeneration_xp_drain_rate = (double)1/40;
+        public static int regeneration_xp_drain_rate = 10;
 
 
         public int getEffectAmplitudeCeiling() {
@@ -260,7 +298,7 @@ public class XpBeaconsCategorySettings {
             return regeneration_xp_based_amplitude;
         }
 
-        public double getXpDrainRate() {
+        public int getXpDrainRate() {
             return regeneration_xp_drain_rate;
         }
 
@@ -302,12 +340,12 @@ public class XpBeaconsCategorySettings {
         public static boolean jump_boost_xp_drain = true;
 
         @Rule(
-                desc="xp drain rate for jump boost. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                desc="xp drain rate for jump boost. each beacon tick takes away (haste_xp_drain_rate * effect amplifier) xp POINTS",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, JUMP},
                 strict = false
         )
-        public static double jump_boost_xp_drain_rate = (double)1/40;
+        public static int jump_boost_xp_drain_rate = 10;
 
 
         public int getEffectAmplitudeCeiling() {
@@ -322,7 +360,7 @@ public class XpBeaconsCategorySettings {
             return jump_boost_xp_based_amplitude;
         }
 
-        public double getXpDrainRate() {
+        public int getXpDrainRate() {
             return jump_boost_xp_drain_rate;
         }
 
@@ -364,12 +402,12 @@ public class XpBeaconsCategorySettings {
         public static boolean strength_xp_drain = true;
 
         @Rule(
-                desc="xp drain rate for strength. each beacon tick takes away (haste_xp_drain_rate * xp level) xp POINTS",
+                desc="xp drain rate for strength. each beacon tick takes away (haste_xp_drain_rate * effect amplifier) xp POINTS",
                 validate = {Validator.NONNEGATIVE_NUMBER.class},
                 category = {xpbeaconsCategory, STRENGTH},
                 strict = false
         )
-        public static double strength_xp_drain_rate = (double)1/40;
+        public static int strength_xp_drain_rate = 10;
 
 
         public int getEffectAmplitudeCeiling() {
@@ -384,7 +422,7 @@ public class XpBeaconsCategorySettings {
             return strength_xp_based_amplitude;
         }
 
-        public double getXpDrainRate() {
+        public int getXpDrainRate() {
             return strength_xp_drain_rate;
         }
 
