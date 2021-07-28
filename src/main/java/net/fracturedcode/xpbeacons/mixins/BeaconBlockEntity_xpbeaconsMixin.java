@@ -46,7 +46,7 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
                 effect = new StatusEffectInstance(
                         effectType,
                         effect.getDuration(),
-                        amplifier,
+                        amplifier == 0 ? 1 : amplifier,
                         effect.isAmbient(),
                         effect.shouldShowParticles(),
                         effect.shouldShowIcon()
