@@ -81,8 +81,6 @@ Alternatively, you can submit a PR on the GitHub page.
 My time is valuable. If I like the idea, maybe I will implement it, and do with the mod as I see fit (probably release it for free). Otherwise, you can hire me.
 
 ## Future features (coming *actually* soon)
-- A new home for the mod on my website (don't worry, I won't be yanking it from curseforge)
-- A maven repository for developers
 - README updates for better command documentation
 - Custom beacon effect length
 - Infinite beacon levels for greater reach and effect length

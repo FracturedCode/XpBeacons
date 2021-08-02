@@ -13,7 +13,7 @@ sourceCompatibility = JavaVersion.VERSION_16
 targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
-version = project.minecraft_version+'-'+project.mod_version
+version = project.compatibility_minecraft_version+'-'+project.mod_version
 group = project.maven_group
 
 
@@ -61,7 +61,11 @@ jar {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
+			artifactId project.archives_base_name
 			// add all the jars that should be included when publishing to maven
+			artifact(remapJar) {
+				builtBy remapJar
+			}
 			artifact(jar) {
 				builtBy remapJar
 			}
@@ -73,7 +77,17 @@ publishing {
 
 	// select the repositories you want to publish to
 	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
+		if (mavenUsername != null && mavenPassword != null) {
+			maven {
+				url "https://maven.fracturedcode.net/releases"
+				credentials {
+					username mavenUsername
+					password mavenPassword
+				}
+				authentication {
+					basic(BasicAuthentication)
+				}
+			}
+		}
 	}
 }
