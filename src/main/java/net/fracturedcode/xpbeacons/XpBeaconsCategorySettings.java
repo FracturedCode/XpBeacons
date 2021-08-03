@@ -23,6 +23,17 @@ public class XpBeaconsCategorySettings {
     // the default level ceiling of xp-based beacon status effects
     public static int xpBeaconsMax = 8000;
 
+    public static class BeaconSettings {
+        private final static String beaconsCategory = "beacons";
+
+        @Rule(
+                desc="set beacon tick rate in game ticks per beacon tick",
+                category = {xpbeaconsCategory, beaconsCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_tick_rate = 80;
+    }
+
     public static class BeaconRadiusSettings {
         private final static String radiusCategory = "beacon radius";
 

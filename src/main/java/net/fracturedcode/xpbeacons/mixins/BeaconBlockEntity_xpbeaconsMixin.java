@@ -11,6 +11,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -74,5 +75,10 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
             }
         }
         return player.addStatusEffect(effect);
+    }
+
+    @Redirect(method="tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getTime()J"))
+    private static long customBeaconTickRate(World world) {
+        return world.getTime() % XpBeaconsCategorySettings.BeaconSettings.beacon_tick_rate == 0L ? 80L : 1L;
     }
 }

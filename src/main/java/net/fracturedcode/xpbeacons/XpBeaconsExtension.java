@@ -24,6 +24,7 @@ public class XpBeaconsExtension implements CarpetExtension {
         customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.StrengthSettings.class);
 
         customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.BeaconRadiusSettings.class);
+        customSettingsManager.parseSettingsClass(XpBeaconsCategorySettings.BeaconSettings.class);
     }
 
     @Override
