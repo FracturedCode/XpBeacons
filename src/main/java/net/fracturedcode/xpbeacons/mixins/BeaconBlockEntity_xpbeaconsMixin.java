@@ -13,9 +13,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.*;
+
 import java.util.Arrays;
 
 @Mixin(BeaconBlockEntity.class)
@@ -41,7 +40,7 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
                 case 30 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_two;
                 case 40 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_three;
                 case 50 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_four;
-                default -> throw new RuntimeException("Impossible beacon radius state for vanilla");
+                default -> 3;
             };
         } else {
             return calculated;
@@ -80,5 +79,10 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
     @Redirect(method="tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getTime()J"))
     private static long customBeaconTickRate(World world) {
         return world.getTime() % XpBeaconsCategorySettings.BeaconSettings.beacon_tick_rate == 0L ? 80L : 1L;
+    }
+
+    @ModifyConstant(method="updateLevel", constant = @Constant(intValue = 4))
+    private static int modifyMaxBeaconLevel(int maxLevel) {
+        return XpBeaconsCategorySettings.BeaconSettings.beacon_max_pyramid_level;
     }
 }

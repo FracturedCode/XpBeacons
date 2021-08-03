@@ -32,6 +32,13 @@ public class XpBeaconsCategorySettings {
                 validate = {Validator.NONNEGATIVE_NUMBER.class}
         )
         public static int beacon_tick_rate = 80;
+
+        @Rule(
+                desc="define the max pyramid level that affects the beacon",
+                category = {xpbeaconsCategory, beaconsCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class}
+        )
+        public static int beacon_max_pyramid_level = 4;
     }
 
     public static class BeaconRadiusSettings {

@@ -82,7 +82,7 @@ My time is valuable. If I like the idea, maybe I will implement it, and do with 
 
 ## Future features (coming *actually* soon)
 - README updates for better command documentation
-- Custom beacon effect length
+- Custom beacon effect duration
 - Infinite beacon levels for greater reach and effect length
 
 ## Dependencies
