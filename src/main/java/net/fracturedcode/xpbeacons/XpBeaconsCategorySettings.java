@@ -29,54 +29,26 @@ public class XpBeaconsCategorySettings {
         @Rule(
                 desc="set beacon tick rate in game ticks per beacon tick",
                 category = {xpbeaconsCategory, beaconsCategory},
-                validate = {Validator.NONNEGATIVE_NUMBER.class}
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                strict = false
         )
         public static int beacon_tick_rate = 80;
 
         @Rule(
                 desc="define the max pyramid level that affects the beacon",
                 category = {xpbeaconsCategory, beaconsCategory},
-                validate = {Validator.NONNEGATIVE_NUMBER.class}
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                strict = false
         )
         public static int beacon_max_pyramid_level = 4;
-    }
-
-    public static class BeaconRadiusSettings {
-        private final static String radiusCategory = "beacon radius";
 
         @Rule(
-                desc="toggle custom beacon reach that uses 'beacon_radius_level_num' rules",
-                category = {xpbeaconsCategory, radiusCategory}
+                desc="(reach multiplier * beacon level) + 10 = reach",
+                category = {xpbeaconsCategory, beaconsCategory},
+                validate = {Validator.NONNEGATIVE_NUMBER.class},
+                strict = false
         )
-        public static boolean beacon_radius_modified = false;
-
-        @Rule(
-                desc="half side length reach of one level pyramid beacon",
-                category = {xpbeaconsCategory, radiusCategory},
-                validate = {Validator.NONNEGATIVE_NUMBER.class}
-        )
-        public static int beacon_radius_level_one = 16;
-
-        @Rule(
-                desc="half side length reach of two level pyramid beacon",
-                category = {xpbeaconsCategory, radiusCategory},
-                validate = {Validator.NONNEGATIVE_NUMBER.class}
-        )
-        public static int beacon_radius_level_two = 32;
-
-        @Rule(
-                desc="half side length reach of three level pyramid beacon",
-                category = {xpbeaconsCategory, radiusCategory},
-                validate = {Validator.NONNEGATIVE_NUMBER.class}
-        )
-        public static int beacon_radius_level_three = 64;
-
-        @Rule(
-                desc="half side length reach of four level pyramid beacon",
-                category = {xpbeaconsCategory, radiusCategory},
-                validate = {Validator.NONNEGATIVE_NUMBER.class}
-        )
-        public static int beacon_radius_level_four = 100;
+        public static int beacon_reach_multiplier = 10;
     }
 
     public static class HasteSettings extends EffectSettings {

@@ -3,8 +3,9 @@
   "package": "net.fracturedcode.xpbeacons.mixins",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "CrashReport_noopMixin",
-    "BeaconBlockEntity_xpbeaconsMixin"
+    "BeaconBlockEntity_xpbeaconsMixin",
+    "ConstructBeaconCriterion_beaconLevelOverride",
+    "CrashReport_noopMixin"
   ],
   "client": [
   ],
