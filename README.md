@@ -7,6 +7,8 @@
 
 A Fabric Carpet extension for the ultimate beacon configuration like experience-based amplitude on beacon status effects, configurable beacon reach and more.
 
+Turn the mod on with `/carpet xpbeacons true` and see some configuration options [in the wiki](https://urlsl.me/xpBeaconsWiki).
+
 ![beacons in action](https://i.imgur.com/H4sapLl.png)
 
 ## But what does that mean, exactly?
