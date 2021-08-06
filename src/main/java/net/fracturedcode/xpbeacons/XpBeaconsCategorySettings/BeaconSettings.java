@@ -18,7 +18,7 @@ public class BeaconSettings {
     public static int beacon_tick_rate = 80;
 
     @Rule(
-            desc="define the max pyramid level that affects the beacon",
+            desc="define the max pyramid level that affects the beacon. Use responsibly; a large pyramid could really start to lag things",
             category = {xpbeaconsCategory, beaconsCategory},
             validate = {Validator.NONNEGATIVE_NUMBER.class},
             strict = false
