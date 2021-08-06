@@ -1,6 +1,6 @@
 package net.fracturedcode.xpbeacons.mixins;
 
-import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings;
+import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.BeaconSettings;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.ConstructBeaconCriterion;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -22,6 +22,6 @@ public abstract class ConstructBeaconCriterion_beaconLevelOverride extends Abstr
     }
 
     private boolean customPredicate(int level) {
-        return level >= 0 && level <= XpBeaconsCategorySettings.BeaconSettings.beacon_max_pyramid_level;
+        return level >= 0 && level <= BeaconSettings.beacon_max_pyramid_level;
     }
 }

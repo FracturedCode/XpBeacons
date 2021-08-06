@@ -1,7 +1,8 @@
 package net.fracturedcode.xpbeacons.mixins;
 
-import net.fracturedcode.xpbeacons.EffectSettings;
-import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings;
+import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.BeaconSettings;
+import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.*;
+import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.StrengthSettings;
 import net.fracturedcode.xpbeacons.XpBeaconsSimpleSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
@@ -23,18 +24,18 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
         super(type, pos, state);
     }
 
-    private static final EffectSettings[] effectsSettings = new EffectSettings[] {
-            new XpBeaconsCategorySettings.StrengthSettings(),
-            new XpBeaconsCategorySettings.HasteSettings(),
-            new XpBeaconsCategorySettings.SpeedSettings(),
-            new XpBeaconsCategorySettings.ResistanceSettings(),
-            new XpBeaconsCategorySettings.RegenerationSettings(),
-            new XpBeaconsCategorySettings.JumpBoostSettings()
+    private static final AbstractEffectSettings[] effectsSettings = new AbstractEffectSettings[] {
+            new StrengthSettings(),
+            new HasteSettings(),
+            new SpeedSettings(),
+            new ResistanceSettings(),
+            new RegenerationSettings(),
+            new JumpBoostSettings()
     };
 
     @ModifyConstant(method="applyPlayerEffects", constant = @Constant(intValue = 10, ordinal = 0))
     private static int customReachMultiplier(int value) {
-        return XpBeaconsCategorySettings.BeaconSettings.beacon_reach_multiplier;
+        return BeaconSettings.beacon_reach_multiplier;
     }
 
     @Redirect(method = "applyPlayerEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
@@ -42,7 +43,7 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
         StatusEffect effectType = effect.getEffectType();
 
         if (XpBeaconsSimpleSettings.xpbeacons) {
-            EffectSettings effectSettings = Arrays.stream(effectsSettings).filter(es -> es.getEffect() == effectType).findFirst().get();
+            AbstractEffectSettings effectSettings = Arrays.stream(effectsSettings).filter(es -> es.getEffect() == effectType).findFirst().get();
             int amplifier = effect.getAmplifier();
 
             if (effectSettings.getXpAmplitudeToggle()) {
@@ -68,11 +69,13 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
 
     @Redirect(method="tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getTime()J"))
     private static long customBeaconTickRate(World world) {
-        return world.getTime() % XpBeaconsCategorySettings.BeaconSettings.beacon_tick_rate == 0L ? 80L : 1L;
+        return XpBeaconsSimpleSettings.xpbeacons ?
+                (world.getTime() % BeaconSettings.beacon_tick_rate == 0 ? 80L : 1L)
+                : world.getTime();
     }
 
     @ModifyConstant(method="updateLevel", constant = @Constant(intValue = 4))
     private static int modifyMaxBeaconLevel(int maxLevel) {
-        return XpBeaconsCategorySettings.BeaconSettings.beacon_max_pyramid_level;
+        return XpBeaconsSimpleSettings.xpbeacons ? BeaconSettings.beacon_max_pyramid_level : maxLevel;
     }
 }
