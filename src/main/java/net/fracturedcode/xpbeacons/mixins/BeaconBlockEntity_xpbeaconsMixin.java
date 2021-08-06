@@ -78,4 +78,9 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
     private static int modifyMaxBeaconLevel(int maxLevel) {
         return XpBeaconsSimpleSettings.xpbeacons ? BeaconSettings.beacon_max_pyramid_level : maxLevel;
     }
+
+    @ModifyConstant(method="applyPlayerEffects", constant = @Constant(intValue = 2))
+    private static int modifyDurationMultiplier(int unmodified) {
+        return XpBeaconsSimpleSettings.xpbeacons ? BeaconSettings.beacon_duration_multiplier : unmodified;
+    }
 }
