@@ -41,7 +41,7 @@ public class ResistanceSettings extends AbstractEffectSettings {
     public static boolean resistance_xp_drain = true;
 
     @Rule(
-            desc="xp drain rate for resistance. each beacon tick takes away (haste_xp_drain_rate * effect amplifier) xp POINTS",
+            desc="xp drain rate for resistance. each beacon tick takes away (resistance_xp_drain_rate * effect amplifier) xp POINTS",
             validate = {Validator.NONNEGATIVE_NUMBER.class},
             category = {xpbeaconsCategory, RESISTANCE},
             strict = false
