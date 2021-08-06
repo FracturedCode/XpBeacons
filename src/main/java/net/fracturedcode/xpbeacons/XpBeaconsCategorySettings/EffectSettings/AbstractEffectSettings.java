@@ -1,8 +1,8 @@
-package net.fracturedcode.xpbeacons;
+package net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings;
 
 import net.minecraft.entity.effect.StatusEffect;
 
-public abstract class EffectSettings {
+public abstract class AbstractEffectSettings {
     protected StatusEffect EffectType;
     public StatusEffect getEffect() {
         return EffectType;

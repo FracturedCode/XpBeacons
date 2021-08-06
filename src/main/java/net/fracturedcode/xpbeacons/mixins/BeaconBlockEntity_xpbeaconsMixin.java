@@ -1,7 +1,8 @@
 package net.fracturedcode.xpbeacons.mixins;
 
-import net.fracturedcode.xpbeacons.EffectSettings;
-import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings;
+import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.BeaconSettings;
+import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.*;
+import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.StrengthSettings;
 import net.fracturedcode.xpbeacons.XpBeaconsSimpleSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
@@ -11,10 +12,10 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.*;
+
 import java.util.Arrays;
 
 @Mixin(BeaconBlockEntity.class)
@@ -23,28 +24,18 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
         super(type, pos, state);
     }
 
-    private static final EffectSettings[] effectsSettings = new EffectSettings[] {
-            new XpBeaconsCategorySettings.StrengthSettings(),
-            new XpBeaconsCategorySettings.HasteSettings(),
-            new XpBeaconsCategorySettings.SpeedSettings(),
-            new XpBeaconsCategorySettings.ResistanceSettings(),
-            new XpBeaconsCategorySettings.RegenerationSettings(),
-            new XpBeaconsCategorySettings.JumpBoostSettings()
+    private static final AbstractEffectSettings[] effectsSettings = new AbstractEffectSettings[] {
+            new StrengthSettings(),
+            new HasteSettings(),
+            new SpeedSettings(),
+            new ResistanceSettings(),
+            new RegenerationSettings(),
+            new JumpBoostSettings()
     };
 
-    @ModifyVariable(method="applyPlayerEffects", at = @At("STORE"), ordinal = 0)
-    private static double customBeaconRadius(double calculated) {
-        if (XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_modified) {
-            return switch ((int) calculated) {
-                case 20 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_one;
-                case 30 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_two;
-                case 40 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_three;
-                case 50 -> XpBeaconsCategorySettings.BeaconRadiusSettings.beacon_radius_level_four;
-                default -> throw new RuntimeException("Impossible beacon radius state for vanilla");
-            };
-        } else {
-            return calculated;
-        }
+    @ModifyConstant(method="applyPlayerEffects", constant = @Constant(intValue = 10, ordinal = 0))
+    private static int customReachMultiplier(int value) {
+        return XpBeaconsSimpleSettings.xpbeacons ? BeaconSettings.beacon_reach_multiplier : value;
     }
 
     @Redirect(method = "applyPlayerEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
@@ -52,7 +43,7 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
         StatusEffect effectType = effect.getEffectType();
 
         if (XpBeaconsSimpleSettings.xpbeacons) {
-            EffectSettings effectSettings = Arrays.stream(effectsSettings).filter(es -> es.getEffect() == effectType).findFirst().get();
+            AbstractEffectSettings effectSettings = Arrays.stream(effectsSettings).filter(es -> es.getEffect() == effectType).findFirst().get();
             int amplifier = effect.getAmplifier();
 
             if (effectSettings.getXpAmplitudeToggle()) {
@@ -74,5 +65,22 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
             }
         }
         return player.addStatusEffect(effect);
+    }
+
+    @Redirect(method="tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getTime()J"))
+    private static long customBeaconTickRate(World world) {
+        return XpBeaconsSimpleSettings.xpbeacons ?
+                (world.getTime() % BeaconSettings.beacon_tick_rate == 0 ? 80L : 1L)
+                : world.getTime();
+    }
+
+    @ModifyConstant(method="updateLevel", constant = @Constant(intValue = 4))
+    private static int modifyMaxBeaconLevel(int maxLevel) {
+        return XpBeaconsSimpleSettings.xpbeacons ? BeaconSettings.beacon_max_pyramid_level : maxLevel;
+    }
+
+    @ModifyConstant(method="applyPlayerEffects", constant = @Constant(intValue = 2))
+    private static int modifyDurationMultiplier(int unmodified) {
+        return XpBeaconsSimpleSettings.xpbeacons ? BeaconSettings.beacon_duration_multiplier : unmodified;
     }
 }

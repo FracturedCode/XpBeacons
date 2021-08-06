@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "xpbeacons",
-  "version": "6.0",
+  "version": "${version}",
 
   "name": "Experience Beacons",
   "description": "Carpet rules for experience-based amplitude on beacon status effects",
