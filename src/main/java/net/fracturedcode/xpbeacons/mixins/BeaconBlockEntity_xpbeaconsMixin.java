@@ -35,7 +35,7 @@ public abstract class BeaconBlockEntity_xpbeaconsMixin extends BlockEntity {
 
     @ModifyConstant(method="applyPlayerEffects", constant = @Constant(intValue = 10, ordinal = 0))
     private static int customReachMultiplier(int value) {
-        return BeaconSettings.beacon_reach_multiplier;
+        return XpBeaconsSimpleSettings.xpbeacons ? BeaconSettings.beacon_reach_multiplier : value;
     }
 
     @Redirect(method = "applyPlayerEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"))
