@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Experience Beacons",
-  "description": "Carpet rules for experience-based amplitude on beacon status effects",
+  "description": "A Fabric Carpet extension for the ultimate beacon configuration like experience-based amplitude on beacon status effects, configurable beacon reach and more.",
   "authors": [
     "FracturedCode"
   ],
@@ -26,7 +26,7 @@
   ],
 
   "depends": {
-    "minecraft": "1.17.x",
+    "minecraft": "1.18.x",
     "fabricloader": ">=0.11.0",
     "carpet": "*"
   },
