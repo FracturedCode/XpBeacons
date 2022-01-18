@@ -23,14 +23,16 @@ public class StrengthSettings extends AbstractEffectSettings {
     @Rule(
             desc="effect amplitude ceiling for strength. one hit a zombie with your fists in this default.",
             validate = AmplifierLimit.class,
-            category = {xpbeaconsCategory, STRENGTH}
+            category = {xpbeaconsCategory, STRENGTH},
+	        strict = false
     )
     public static int strength_amplitude_ceiling = 4;
 
     @Rule(
             desc="xp ceiling in levels for strength",
             validate = Validator.NONNEGATIVE_NUMBER.class,
-            category = {xpbeaconsCategory, STRENGTH}
+            category = {xpbeaconsCategory, STRENGTH},
+	        strict = false
     )
     public static int strength_xp_ceiling = xpBeaconsMax;
 

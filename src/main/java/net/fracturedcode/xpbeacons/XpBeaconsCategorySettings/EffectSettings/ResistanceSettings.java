@@ -23,14 +23,16 @@ public class ResistanceSettings extends AbstractEffectSettings {
     @Rule(
             desc="effect amplitude ceiling for resistance. with default of 3 you can survive 100m drop no armor on half heart. 200m drop with enchanted armor easily",
             validate = AmplifierLimit.class,
-            category = {xpbeaconsCategory, RESISTANCE}
+            category = {xpbeaconsCategory, RESISTANCE},
+	        strict = false
     )
     public static int resistance_amplitude_ceiling = 3;
 
     @Rule(
             desc="xp ceiling in levels for resistance",
             validate = Validator.NONNEGATIVE_NUMBER.class,
-            category = {xpbeaconsCategory, RESISTANCE}
+            category = {xpbeaconsCategory, RESISTANCE},
+	    strict = false
     )
     public static int resistance_xp_ceiling = xpBeaconsMax;
 

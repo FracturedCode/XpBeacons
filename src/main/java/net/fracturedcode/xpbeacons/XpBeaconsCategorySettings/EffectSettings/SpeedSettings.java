@@ -31,7 +31,8 @@ public class SpeedSettings extends AbstractEffectSettings {
     @Rule(
             desc="xp ceiling in levels for speed",
             validate = Validator.NONNEGATIVE_NUMBER.class,
-            category = {xpbeaconsCategory, SPEED}
+            category = {xpbeaconsCategory, SPEED},
+	        strict = false
     )
     public static int speed_xp_ceiling = xpBeaconsMax;
 

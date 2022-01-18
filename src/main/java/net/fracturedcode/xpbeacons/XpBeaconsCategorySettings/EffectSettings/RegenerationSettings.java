@@ -23,14 +23,16 @@ public class RegenerationSettings extends AbstractEffectSettings {
     @Rule(
             desc="effect amplitude ceiling for resistance. default 5 is pretty fast, but if you have the default 8000 levels, is it really OP?",
             validate = AmplifierLimit.class,
-            category = {xpbeaconsCategory, REGENERATION}
+            category = {xpbeaconsCategory, REGENERATION},
+	        strict = false
     )
     public static int regeneration_amplitude_ceiling = 5;
 
     @Rule(
             desc="xp ceiling in levels for resistance",
             validate = Validator.NONNEGATIVE_NUMBER.class,
-            category = {xpbeaconsCategory, REGENERATION}
+            category = {xpbeaconsCategory, REGENERATION},
+	        strict = false
     )
     public static int regeneration_xp_ceiling = xpBeaconsMax;
 
