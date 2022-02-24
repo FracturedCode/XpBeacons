@@ -23,14 +23,16 @@ public class JumpBoostSettings extends AbstractEffectSettings {
     @Rule(
             desc="effect amplitude ceiling for jump boost",
             validate = {AmplifierLimit.class},
-            category = {xpbeaconsCategory, JUMP}
+            category = {xpbeaconsCategory, JUMP},
+	        strict = false
     )
     public static int jump_boost_amplitude_ceiling = 2;
 
     @Rule(
             desc="xp ceiling in levels for jump boost",
             validate = {Validator.NONNEGATIVE_NUMBER.class},
-            category = {xpbeaconsCategory, JUMP}
+            category = {xpbeaconsCategory, JUMP},
+	        strict = false
     )
     public static int jump_boost_xp_ceiling = xpBeaconsMax;
 

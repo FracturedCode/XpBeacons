@@ -22,7 +22,7 @@ public class SpeedSettings extends AbstractEffectSettings {
 
     @Rule(
             desc="effect amplitude ceiling for speed. default speed 6, about as fast as I'd want to go",
-            validate = {AmplifierLimit.class},
+            validate = AmplifierLimit.class,
             category = {xpbeaconsCategory, SPEED},
             strict = false
     )
@@ -30,8 +30,9 @@ public class SpeedSettings extends AbstractEffectSettings {
 
     @Rule(
             desc="xp ceiling in levels for speed",
-            validate = {Validator.NONNEGATIVE_NUMBER.class},
-            category = {xpbeaconsCategory, SPEED}
+            validate = Validator.NONNEGATIVE_NUMBER.class,
+            category = {xpbeaconsCategory, SPEED},
+	        strict = false
     )
     public static int speed_xp_ceiling = xpBeaconsMax;
 

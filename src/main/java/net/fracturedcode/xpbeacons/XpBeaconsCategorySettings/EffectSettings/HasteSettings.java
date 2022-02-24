@@ -30,8 +30,9 @@ public class HasteSettings extends AbstractEffectSettings {
 
     @Rule(
             desc="xp ceiling in levels for haste",
-            validate = {Validator.NONNEGATIVE_NUMBER.class},
-            category = {xpbeaconsCategory, HASTE}
+            validate = Validator.NONNEGATIVE_NUMBER.class,
+            category = {xpbeaconsCategory, HASTE},
+		    strict = false
     )
     public static int haste_xp_ceiling = xpBeaconsMax;
 
