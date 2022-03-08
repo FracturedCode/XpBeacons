@@ -2,7 +2,6 @@ package net.fracturedcode.xpbeacons.mixins;
 
 import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.BeaconSettings;
 import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.*;
-import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.StrengthSettings;
 import net.fracturedcode.xpbeacons.XpBeaconsSimpleSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
