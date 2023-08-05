@@ -55,13 +55,15 @@ Once I get far enough into the game, I prefer not to have to worry too much abou
 I have none planned. In my eyes, this is now a rare "complete" project. Obviously, I will have to come back to maintain it for future versions, but it currently has all the features I want. If you have suggestions submit an issue, pull request, leave a comment or contact me directly.
 
 ## What versions will it work with?
-Currently, you must have 1.17.x or 1.18.
+For the latest version, 1.19+.
 
-Version 7.0 is 1.17 compatible.
-Version 2.0 is 1.16 compatible, but I wouldn't recommend it. If you would like me to backport this to no older than 1.14, just open a github issue, contact me, or leave a comment. All you have to do is ask.
+- Version 7.2 is 1.19 compatible.
+- Version 7.1 is 1.18 compatible.
+- Version 7.0 is 1.17 compatible.
+- Version 2.0 is 1.16 compatible, but I wouldn't recommend it. If you would like me to backport this to no older than 1.14, just open a github issue, contact me, or leave a comment. All you have to do is ask.
 
 ## Dependencies
-Minecraft: 1.18.x
+Minecraft: 1.19.x, 1.20.x
 
 Fabric loader: >= 0.11.0
 
