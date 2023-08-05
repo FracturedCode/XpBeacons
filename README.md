@@ -69,7 +69,7 @@ Fabric loader: >= 0.11.0
 
 fabric-carpet: 1.4.*
 
-To use this mod, you must have [fabric-carpet](https://www.curseforge.com/minecraft/mc-mods/carpet). It is a Carpet extension and Carpet commands are used to configure this mod.
+To use this mod, you must have [fabric-carpet](github.com/gnembon/fabric-carpet). It is a Carpet extension and Carpet commands are used to configure this mod.
 
 The default behavior out of the box is vanilla; you can play with the dials to customize your experience.
 
