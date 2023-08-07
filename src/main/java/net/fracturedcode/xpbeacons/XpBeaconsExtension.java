@@ -37,7 +37,7 @@ public class XpBeaconsExtension implements CarpetExtension {
     }
 
     public Map<String, String> canHasTranslations(String lang) {
-        InputStream langFile = XpBeaconsExtension.class.getClassLoader().getResourceAsStream("assets/xpbeacons/lang/%s.json".formatted(lang));
+        InputStream langFile = XpBeaconsExtension.class.getResourceAsStream("/assets/xpbeacons/lang/%s.json".formatted(lang));
         if (langFile == null) {
             // we don't have that language
             return Collections.emptyMap();
