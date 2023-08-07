@@ -3,8 +3,17 @@ package net.fracturedcode.xpbeacons;
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpet.settings.SettingsManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.BeaconSettings;
 import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings.*;
+import org.apache.commons.io.IOUtils;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.Map;
 
 public class XpBeaconsExtension implements CarpetExtension {
     private final static SettingsManager customSettingsManager;
@@ -31,5 +40,21 @@ public class XpBeaconsExtension implements CarpetExtension {
     @Override
     public SettingsManager customSettingsManager() {
         return customSettingsManager;
+    }
+
+    public Map<String, String> canHasTranslations(String lang) {
+        InputStream langFile = XpBeaconsExtension.class.getClassLoader().getResourceAsStream("assets/xpbeacons/lang/%s.json".formatted(lang));
+        if (langFile == null) {
+            // we don't have that language
+            return Collections.emptyMap();
+        }
+        String jsonData;
+        try {
+            jsonData = IOUtils.toString(langFile, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            return Collections.emptyMap();
+        }
+        Gson gson = new GsonBuilder().setLenient().create(); // lenient allows for comments
+        return gson.fromJson(jsonData, new TypeToken<Map<String, String>>() {}.getType());
     }
 }
