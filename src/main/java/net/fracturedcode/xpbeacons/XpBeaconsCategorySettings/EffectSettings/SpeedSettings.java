@@ -1,7 +1,8 @@
 package net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings;
 
-import carpet.settings.Rule;
-import carpet.settings.Validator;
+import carpet.api.settings.Rule;
+import carpet.api.settings.Validator;
+import carpet.api.settings.Validators;
 import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.AmplifierLimit;
 import net.minecraft.entity.effect.StatusEffects;
 
@@ -14,38 +15,29 @@ public class SpeedSettings extends AbstractEffectSettings {
         EffectType = StatusEffects.SPEED;
     }
 
-    @Rule(
-            desc="toggle xp beacons for speed effect",
-            category = {xpbeaconsCategory, SPEED}
-    )
+    @Rule(categories = {xpbeaconsCategory, SPEED})
     public static boolean speed_xp_based_amplitude = true;
 
     @Rule(
-            desc="effect amplitude ceiling for speed. default speed 6, about as fast as I'd want to go",
-            validate = AmplifierLimit.class,
-            category = {xpbeaconsCategory, SPEED},
+            validators = AmplifierLimit.class,
+            categories = {xpbeaconsCategory, SPEED},
             strict = false
     )
     public static int speed_amplitude_ceiling = 5;
 
     @Rule(
-            desc="xp ceiling in levels for speed",
-            validate = Validator.NONNEGATIVE_NUMBER.class,
-            category = {xpbeaconsCategory, SPEED},
+            validators = Validators.NonNegativeNumber.class,
+            categories = {xpbeaconsCategory, SPEED},
 	        strict = false
     )
     public static int speed_xp_ceiling = xpBeaconsMax;
 
-    @Rule(
-            desc="xp drain feature toggle for speed",
-            category = {xpbeaconsCategory, SPEED}
-    )
+    @Rule(categories = {xpbeaconsCategory, SPEED})
     public static boolean speed_xp_drain = true;
 
     @Rule(
-            desc="xp drain rate for haste. each beacon tick takes away (speed_xp_drain_rate * effect amplifier) xp POINTS",
-            validate = {Validator.NONNEGATIVE_NUMBER.class},
-            category = {xpbeaconsCategory, SPEED}
+            validators = {Validators.NonNegativeNumber.class},
+            categories = {xpbeaconsCategory, SPEED}
     )
     public static int speed_xp_drain_rate = 10;
 

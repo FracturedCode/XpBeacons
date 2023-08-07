@@ -1,7 +1,8 @@
 package net.fracturedcode.xpbeacons.XpBeaconsCategorySettings;
 
-import carpet.settings.Rule;
-import carpet.settings.Validator;
+import carpet.api.settings.Rule;
+import carpet.api.settings.Validator;
+import carpet.api.settings.Validators;
 
 public class BeaconSettings {
     public static final String beaconsCategory = "general beacon settings";
@@ -10,33 +11,29 @@ public class BeaconSettings {
     public static final int xpBeaconsMax = 8000;
 
     @Rule(
-            desc="set beacon tick rate in game ticks per beacon tick",
-            category = {xpbeaconsCategory, beaconsCategory},
-            validate = {Validator.NONNEGATIVE_NUMBER.class},
+            categories = {xpbeaconsCategory, beaconsCategory},
+            validators = {Validators.NonNegativeNumber.class},
             strict = false
     )
     public static int beacon_tick_rate = 80;
 
     @Rule(
-            desc="define the max pyramid level that affects the beacon. Use responsibly; a large pyramid could really start to lag things",
-            category = {xpbeaconsCategory, beaconsCategory},
-            validate = {Validator.NONNEGATIVE_NUMBER.class},
+            categories = {xpbeaconsCategory, beaconsCategory},
+            validators = {Validators.NonNegativeNumber.class},
             strict = false
     )
     public static int beacon_max_pyramid_level = 4;
 
     @Rule(
-            desc="(beacon_reach_multiplier * beacon level) + 10 = reach in meters according to the vanilla behavior",
-            category = {xpbeaconsCategory, beaconsCategory},
-            validate = {Validator.NONNEGATIVE_NUMBER.class},
+            categories = {xpbeaconsCategory, beaconsCategory},
+            validators = {Validators.NonNegativeNumber.class},
             strict = false
     )
     public static int beacon_reach_multiplier = 10;
 
     @Rule(
-            desc="effect duration in ticks= (9 + beacon level * beacon_duration_multiplier) * 20 according to the vanilla behavior",
-            category = {xpbeaconsCategory, beaconsCategory},
-            validate = {Validator.NONNEGATIVE_NUMBER.class},
+            categories = {xpbeaconsCategory, beaconsCategory},
+            validators = {Validators.NonNegativeNumber.class},
             strict = false
     )
     public static int beacon_duration_multiplier = 2;

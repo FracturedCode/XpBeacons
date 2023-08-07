@@ -1,7 +1,8 @@
 package net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.EffectSettings;
 
-import carpet.settings.Rule;
-import carpet.settings.Validator;
+import carpet.api.settings.Rule;
+import carpet.api.settings.Validator;
+import carpet.api.settings.Validators;
 import net.fracturedcode.xpbeacons.XpBeaconsCategorySettings.AmplifierLimit;
 import net.minecraft.entity.effect.StatusEffects;
 
@@ -14,38 +15,29 @@ public class HasteSettings extends AbstractEffectSettings {
         EffectType = StatusEffects.HASTE;
     }
 
-    @Rule(
-            desc="toggle xp beacons for haste effect",
-            category = {xpbeaconsCategory, HASTE}
-    )
+    @Rule(categories = {xpbeaconsCategory, HASTE})
     public static boolean haste_xp_based_amplitude = true;
 
     @Rule(
-            desc="effect amplitude ceiling for haste. default maybe a bit OP, play around with this one; mining obsidian is like mining stone without enchants or haste",
-            validate = AmplifierLimit.class,
-            category = {xpbeaconsCategory, HASTE},
+            validators = AmplifierLimit.class,
+            categories = {xpbeaconsCategory, HASTE},
             strict = false
     )
     public static int haste_amplitude_ceiling = 10;
 
     @Rule(
-            desc="xp ceiling in levels for haste",
-            validate = Validator.NONNEGATIVE_NUMBER.class,
-            category = {xpbeaconsCategory, HASTE},
+            validators = Validators.NonNegativeNumber.class,
+            categories = {xpbeaconsCategory, HASTE},
 		    strict = false
     )
     public static int haste_xp_ceiling = xpBeaconsMax;
 
-    @Rule(
-            desc="xp drain feature toggle for haste",
-            category = {xpbeaconsCategory, HASTE}
-    )
+    @Rule(categories = {xpbeaconsCategory, HASTE})
     public static boolean haste_xp_drain = true;
 
     @Rule(
-            desc="xp drain rate for haste. each beacon tick takes away (haste_xp_drain_rate * effect amplifier) xp POINTS",
-            validate = {Validator.NONNEGATIVE_NUMBER.class},
-            category = {xpbeaconsCategory, HASTE}
+            validators = {Validators.NonNegativeNumber.class},
+            categories = {xpbeaconsCategory, HASTE}
     )
     public static int haste_xp_drain_rate = 10;
 
