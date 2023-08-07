@@ -2,7 +2,7 @@ package net.fracturedcode.xpbeacons;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-import carpet.settings.SettingsManager;
+import carpet.api.settings.SettingsManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -33,13 +33,7 @@ public class XpBeaconsExtension implements CarpetExtension {
         customSettingsManager.parseSettingsClass(ResistanceSettings.class);
         customSettingsManager.parseSettingsClass(JumpBoostSettings.class);
         customSettingsManager.parseSettingsClass(StrengthSettings.class);
-
         customSettingsManager.parseSettingsClass(BeaconSettings.class);
-    }
-
-    @Override
-    public SettingsManager customSettingsManager() {
-        return customSettingsManager;
     }
 
     public Map<String, String> canHasTranslations(String lang) {

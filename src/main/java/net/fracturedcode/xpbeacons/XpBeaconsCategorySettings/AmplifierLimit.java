@@ -1,12 +1,12 @@
 package net.fracturedcode.xpbeacons.XpBeaconsCategorySettings;
 
-import carpet.settings.ParsedRule;
-import carpet.settings.Validator;
+import carpet.api.settings.CarpetRule;
+import carpet.api.settings.Validator;
 import net.minecraft.server.command.ServerCommandSource;
 
 public class AmplifierLimit extends Validator<Integer> {
     @Override
-    public Integer validate(ServerCommandSource source, ParsedRule<Integer> currentRule, Integer newValue, String string) {
+    public Integer validate(ServerCommandSource source, CarpetRule<Integer> currentRule, Integer newValue, String string) {
         return (newValue >= 0 && newValue <= 255) ? newValue : null;
     }
     @Override
