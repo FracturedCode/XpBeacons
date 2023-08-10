@@ -21,7 +21,7 @@ public class XpBeaconsExtension implements CarpetExtension {
 
     static {
         CarpetServer.manageExtension(new XpBeaconsExtension());
-        customSettingsManager = new SettingsManager("7.3", "xpbeacons", "Experience Beacons");//VERSION
+        customSettingsManager = new SettingsManager("7.4", "xpbeacons", "Experience Beacons");//VERSION
     }
     @Override
     public void onGameStarted() {
