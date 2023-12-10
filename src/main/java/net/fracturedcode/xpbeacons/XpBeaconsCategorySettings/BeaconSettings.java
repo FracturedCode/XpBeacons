@@ -1,11 +1,10 @@
 package net.fracturedcode.xpbeacons.XpBeaconsCategorySettings;
 
 import carpet.api.settings.Rule;
-import carpet.api.settings.Validator;
 import carpet.api.settings.Validators;
 
 public class BeaconSettings {
-    public static final String beaconsCategory = "general beacon settings";
+    public static final String beaconsCategory = "general_beacon_settings";
     public static final String xpbeaconsCategory = "xpbeacons";
     // the default level ceiling of xp-based beacon status effects
     public static final int xpBeaconsMax = 8000;
